@@ -12,7 +12,8 @@
     "tsconfig": "*",
     "turbo": "latest"
   },
-  "name": "my-turborepo",
+  "name": "duosync-call",
+  "author": "Keyur Gondaliya",
   "packageManager": "npm@8.19.1",
   "workspaces": [
     "apps/*",
