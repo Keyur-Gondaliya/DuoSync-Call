@@ -1,13 +1,29 @@
+interface LocalDescriptionType {
+  description: RTCSessionDescription | null;
+}
 export interface ServerToClientEvents {
   noArg: () => void;
   basicEmit: (a: number, b: string, c: Buffer) => void;
   withAck: (d: string, callback: (e: number) => void) => void;
+  iceCandidate: (params: IceCandidateType) => void;
+  localDescription: (params: LocalDescriptionType) => void;
+  iceCandidateReply: (params: IceCandidateType) => void;
+  remoteDescription: (params: LocalDescriptionType) => void;
 }
 interface JoinType {
   roomId: string;
 }
+
+interface IceCandidateType {
+  candidate: RTCIceCandidate | null;
+}
+
 export interface ClientToServerEvents {
-  join: (params: JoinType) => void;
+  join: (params: JoinType, callback: (e: string) => void) => void;
+  iceCandidate: (params: IceCandidateType) => void;
+  localDescription: (params: LocalDescriptionType) => void;
+  iceCandidateReply: (params: IceCandidateType) => void;
+  remoteDescription: (params: LocalDescriptionType) => void;
 }
 
 export interface InterServerEvents {

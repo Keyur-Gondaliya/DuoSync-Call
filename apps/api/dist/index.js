@@ -59,17 +59,18 @@ io.on("connection", (socket) => {
     //     }
     //   })
     // });
-    // socket.on("iceCandidate", (params) => {
-    //   let roomId = users[socket.id].roomId;
-    //   let otherUsers = rooms[roomId].users;
-    //   otherUsers.forEach(otherUser => {
-    //     if (otherUser !== socket.id) {
-    //       io.to(otherUser).emit("iceCandidate", {
-    //         candidate: params.candidate
-    //       })
-    //     }
-    //   })
-    // });
+    socket.on("iceCandidate", (params) => {
+        console.log("hgg", params);
+        let roomId = users[socket.id].roomId;
+        let otherUsers = rooms[roomId].users;
+        // otherUsers.forEach(otherUser => {
+        //   if (otherUser !== socket.id) {
+        //     io.to(otherUser).emit("iceCandidate", {
+        //       candidate: params.candidate
+        //     })
+        //   }
+        // })
+    });
     // socket.on("iceCandidateReply", (params) => {
     //   let roomId = users[socket.id].roomId;
     //   let otherUsers = rooms[roomId].users;
