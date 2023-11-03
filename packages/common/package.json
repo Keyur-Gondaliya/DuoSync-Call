@@ -10,7 +10,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "zod": "^3.22.2"
-  }
+  "dependencies": {}
 }

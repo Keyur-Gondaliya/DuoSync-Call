@@ -1,42 +1,10 @@
 import { io, Socket } from "socket.io-client";
 import { useEffect, useState } from "react";
 import Video from "@/app/Components/Video";
-export interface ServerToClientEvents {
-  noArg: () => void;
-  basicEmit: (a: number, b: string, c: Buffer) => void;
-  withAck: (d: string, callback: (e: number) => void) => void;
-  iceCandidate: (params: IceCandidateType) => void;
-  localDescription: (params: LocalDescriptionType) => void;
-  remoteDescription: (params: LocalDescriptionType) => void;
-}
-interface JoinType {
-  roomId: string;
-}
-interface IceCandidateType {
-  candidate: RTCIceCandidate | null;
-}
-interface LocalDescriptionType {
-  description: RTCSessionDescription | null;
-}
-export interface ClientToServerEvents {
-  join: (params: JoinType) => void;
-  iceCandidate: (params: IceCandidateType) => void;
-  localDescription: (params: LocalDescriptionType) => void;
-  iceCandidateReply: (params: IceCandidateType) => void;
-  remoteDescription: (params: LocalDescriptionType) => void;
-}
-
-export interface InterServerEvents {
-  ping: () => void;
-}
-
-export interface SocketData {
-  name: string;
-  age: number;
-}
-interface User {
-  roomId: string;
-}
+import {
+  ClientToServerEvents,
+  ServerToClientEvents,
+} from "@keyur-gondaliya/common";
 
 export default function Home() {
   const [socket, setSocket] =
@@ -63,9 +31,11 @@ export default function Home() {
       .then(async (stream) => {
         setVideoStream(stream);
       });
-    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-      "http://localhost:3001"
-    );
+    let baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
+    console.log(process.env.NEXT_PUBLIC_BASE_URL);
+
+    const socket: Socket<ServerToClientEvents, ClientToServerEvents> =
+      io(baseUrl);
     let roomId = "paramsTokenId";
     socket.on("connect", () => {
       setSocket(socket);
@@ -125,7 +95,6 @@ export default function Home() {
           onClick={async () => {
             pc.onicecandidate = ({ candidate }) => {
               console.log(candidate);
-
               socket.emit("iceCandidate", { candidate });
             };
             pc.addTrack(videoStream.getVideoTracks()[0]);
@@ -145,6 +114,8 @@ export default function Home() {
         </button>
       </>
     );
+  console.log(remoteVideoStream);
+
   return (
     <div
       style={{

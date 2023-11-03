@@ -1,8 +1,3 @@
-import express from "express";
-const app = express();
-import { createServer } from "http";
-const server = createServer(app);
-import { Server } from "socket.io";
 import {
   ClientToServerEvents,
   InterServerEvents,
@@ -10,8 +5,15 @@ import {
   ServerToClientEvents,
   SocketData,
   Users,
-} from "./general";
+} from "@keyur-gondaliya/common";
+import express from "express";
+const app = express();
+import { createServer } from "http";
+const server = createServer(app);
+import { Server } from "socket.io";
 
+import dotenv from "dotenv";
+dotenv.config();
 const io = new Server<
   ClientToServerEvents,
   ServerToClientEvents,
@@ -19,9 +21,10 @@ const io = new Server<
   SocketData
 >(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CORE_URL,
   },
 });
+console.log(process.env.CORE_URL);
 
 const rooms: Rooms = {};
 const users: Users = {};
@@ -29,12 +32,12 @@ const users: Users = {};
 io.on("connection", (socket) => {
   console.log("a user connected " + socket.id);
 
-  // socket.on("disconnect", (params) => {
-  //   Object.keys(rooms).map(roomId => {
-  //     rooms[roomId].users = rooms[roomId].users.filter(x => x !== socket.id)
-  //   })
-  //   delete users[socket.id];
-  // })
+  socket.on("disconnect", (params) => {
+    Object.keys(rooms).map((roomId) => {
+      rooms[roomId].users = rooms[roomId].users.filter((x) => x !== socket.id);
+    });
+    delete users[socket.id];
+  });
 
   socket.on("join", (params) => {
     const roomId: string = params.roomId;

@@ -18,7 +18,7 @@ function Video({ stream }: Props) {
       <video
         style={{ borderRadius: 10 }}
         ref={refinedVideoRef}
-        muted
+        // muted
         width="100%"
         autoPlay={true}
         playsInline={true}
