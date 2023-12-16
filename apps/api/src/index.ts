@@ -11,7 +11,6 @@ const app = express();
 import { createServer } from "http";
 const server = createServer(app);
 import { Server } from "socket.io";
-
 import dotenv from "dotenv";
 dotenv.config();
 const io = new Server<
@@ -24,7 +23,6 @@ const io = new Server<
     origin: process.env.CORE_URL,
   },
 });
-console.log(process.env.CORE_URL);
 
 const rooms: Rooms = {};
 const users: Users = {};
@@ -108,5 +106,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(3001, () => {
-  console.log("DuoSync Call listening on :3001");
+  console.log("DuoSync Call listening on Port 3001");
 });

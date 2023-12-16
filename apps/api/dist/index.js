@@ -15,7 +15,6 @@ const io = new socket_io_1.Server(server, {
         origin: process.env.CORE_URL,
     },
 });
-console.log(process.env.CORE_URL);
 const rooms = {};
 const users = {};
 io.on("connection", (socket) => {
@@ -86,5 +85,5 @@ io.on("connection", (socket) => {
     });
 });
 server.listen(3001, () => {
-    console.log("DuoSync Call listening on :3001");
+    console.log("DuoSync Call listening on Port 3001");
 });

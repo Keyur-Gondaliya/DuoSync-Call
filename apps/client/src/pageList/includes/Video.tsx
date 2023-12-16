@@ -1,8 +1,12 @@
 import { RefObject, useEffect, useRef } from "react";
 
-type Props = { stream: MediaStream | undefined };
+type Props = {
+  stream: MediaStream | undefined;
+  muted: boolean;
+  poster: string;
+};
 
-function Video({ stream }: Props) {
+function Video({ stream, muted, poster }: Props) {
   const videoRef = useRef<HTMLVideoElement>();
   const refinedVideoRef: RefObject<HTMLVideoElement> =
     videoRef as RefObject<HTMLVideoElement>;
@@ -13,15 +17,19 @@ function Video({ stream }: Props) {
     }
   }, [videoRef, stream]);
   return (
-    <div>
-      {" "}
+    <div className="w-full h-full rounded-2xl border-gray-300 border-2 bg-slate-300">
       <video
-        style={{ borderRadius: 10 }}
         ref={refinedVideoRef}
-        // muted
-        width="100%"
         autoPlay={true}
         playsInline={true}
+        style={{
+          width: "100%",
+          height: "100%",
+          borderRadius: "10px ",
+          padding: "0.4rem",
+        }}
+        // muted={muted}
+        // poster={poster}
       />
     </div>
   );

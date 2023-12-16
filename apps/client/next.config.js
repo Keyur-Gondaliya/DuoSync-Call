@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  transpilePackages: ["@keyur-gondaliya/ui", "@keyur-gondaliya/common"],
-};
+const nextConfig = {}
 
-module.exports = nextConfig;
+module.exports = nextConfig
