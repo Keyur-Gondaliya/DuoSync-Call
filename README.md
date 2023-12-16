@@ -2,6 +2,10 @@
 
 DuoSync-Call is a project built with Next.js and Node.js using TypeScript. It allows two users to establish a peer-to-peer connection exclusively via Socket.IO and WebRTC. This project is organized as a monorepo using TurboRepo for streamlined management.
 
+# Demo
+
+![](https://github.com/Keyur-Gondaliya/DuoSync-Call/blob/main/apps/client/public/intro.mp4)
+
 ## Features
 
 - **Peer-to-Peer Connection:** Enables direct communication between two users.
@@ -56,7 +60,8 @@ To run the project in development mode:
 
 ```bash
 cd apps/client
-npm run dev
+npm run build
+npm start
 ```
 
 2.Start the backend:
