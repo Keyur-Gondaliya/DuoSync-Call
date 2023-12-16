@@ -4,7 +4,15 @@ DuoSync-Call is a project built with Next.js and Node.js using TypeScript. It al
 
 # Demo
 
-![](https://github.com/Keyur-Gondaliya/DuoSync-Call/blob/main/apps/client/public/intro.gif)
+```html
+<div style="text-align: center;">
+  <img
+    src="https://github.com/Keyur-Gondaliya/DuoSync-Call/blob/main/apps/client/public/intro.gif"
+    width="100%"
+    height="70%"
+  />
+</div>
+```
 
 ## Features
 
